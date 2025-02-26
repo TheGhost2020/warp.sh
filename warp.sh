@@ -702,8 +702,6 @@ Generate_WireGuardProfile_Interface_Rule_DualStack_nonGlobal() {
 
 Generate_WireGuardProfile_Interface_Rule_IPv4_Global_srcIP() {
     cat <<EOF >>${WireGuard_ConfPath}
-PostUp = ip -4 rule add from ${IPv4_addr} lookup main prio 18
-PostDown = ip -4 rule delete from ${IPv4_addr} lookup main prio 18
 PostUp = ip -4 rule add from 172.16.0.2 lookup 51820
 PostDown = ip -4 rule delete from 172.16.0.2 lookup 51820
 PostUp = ip -4 rule add table main suppress_prefixlength 0
@@ -714,8 +712,6 @@ EOF
 
 Generate_WireGuardProfile_Interface_Rule_IPv6_Global_srcIP() {
     cat <<EOF >>${WireGuard_ConfPath}
-PostUp = ip -6 rule add from ${IPv6_addr} lookup main prio 18
-PostDown = ip -6 rule delete from ${IPv6_addr} lookup main prio 18
 PostUp = ip -6 rule add table main suppress_prefixlength 0
 PostDown = ip -6 rule delete table main suppress_prefixlength 0
 PostUp = ip -6 rule add oif wgcf lookup 51820
